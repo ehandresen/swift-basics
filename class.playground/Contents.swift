@@ -18,12 +18,29 @@ class Developer {
     }
 }
 
-let dev = Developer(name: "joe", jobTitle: "junior dev", yearsExp: 0)
-let dev2 = Developer()
+class iOSDeveloper: Developer {
+    var favoriteFramework: String?
+    
+    func speakFavoriteFramework() {
+        // using optinal binding, instead of force unwrap like above
+        if let favoriteFramework = favoriteFramework {
+            print(favoriteFramework)
+        } else {
+            print("i dont have any favorite")
+        }
+    }
+    
+    // overriding parent function
+    override func speakName() {
+        print("\(name!) - \(jobTitle!)")
+    }
+}
 
-dev.name
-dev.jobTitle
-dev.speakName()
+let dev = iOSDeveloper(name: "Bob", jobTitle: "iOS Dev", yearsExp: 5)
 
-dev2.name // nil
+dev.speakFavoriteFramework() // i dont have any favorite (because favoriteFramework is nil)
+dev.favoriteFramework = "ARKIT"
+dev.speakFavoriteFramework() // ARKIT
+
+dev.speakName() // Bob - iOS Dev
 
